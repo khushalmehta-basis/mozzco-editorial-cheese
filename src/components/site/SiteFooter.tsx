@@ -1,3 +1,5 @@
+import { Logo } from "./Logo";
+
 const cols = [
   { t: "Shop", l: ["All cheese", "Mozzarella", "Cow's milk", "Goat's milk", "Selections"] },
   { t: "Gifts", l: ["Gift boxes", "Build your own", "Corporate", "Subscriptions"] },
@@ -12,10 +14,8 @@ export function SiteFooter() {
       <div className="max-w-[1280px] mx-auto px-6 lg:px-10">
         <div className="flex flex-col lg:flex-row justify-between gap-14 mb-16">
           <div className="lg:max-w-xs">
-            <a href="/" className="font-serif text-3xl text-ink">
-              Mozzco<span className="text-olive">.</span>
-            </a>
-            <p className="mt-5 font-serif text-[16px] italic text-ink/70 leading-relaxed">
+            <Logo variant="footer" />
+            <p className="mt-6 font-serif text-[16px] italic text-ink/70 leading-relaxed">
               Italian-style cheeses, made by hand in Dallas since 1982.
             </p>
             <p className="mt-6 text-[13px] text-ink/55">
