@@ -1,5 +1,6 @@
 import { Search, User, ShoppingBag } from "lucide-react";
 import { useEffect, useState } from "react";
+import { Logo } from "./Logo";
 
 const links = ["Shop", "Gifts", "Classes", "Story", "Recipes"];
 
@@ -26,9 +27,7 @@ export function SiteNav() {
         }`}
       >
         <div className="max-w-[1280px] mx-auto px-6 lg:px-10 h-16 flex items-center justify-between">
-          <a href="/" className="font-serif text-xl tracking-tight text-ink">
-            Mozzco<span className="text-olive">.</span>
-          </a>
+          <Logo variant="nav" />
           <ul className="hidden md:flex items-center gap-9 text-[13px] tracking-[0.14em] uppercase font-medium text-ink/85">
             {links.map((l) => (
               <li key={l}>

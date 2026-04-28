@@ -1,62 +1,50 @@
-## Use the uploaded team photo in a modern, editorial way
+## Use the uploaded Mozzco logo across the site
 
-The image is gold for the brand: five smiling cheesemakers in branded tees, in the actual Dallas factory, hands deep in fresh curd. It tells the "made by hand, by real people" story better than any stock shot. I'll use it as the centerpiece of a new module — not just dropped in as a decoration.
+Replace the current text wordmark ("Mozzco.") in the navigation and footer with the uploaded brand logo (the green/red MOZZCO mark with mozzarella photo and "Handmade Artisanal Cheeses & Creamery" tagline).
 
 ### 1. Save the asset
 
-Copy `user-uploads://ChatGPT_Image_Apr_28_2026_08_11_05_PM.png` → `src/assets/team-curd-table.jpg`.
+Copy `user-uploads://ChatGPT_Image_Apr_28_2026_08_24_02_PM.png` → `src/assets/mozzco-logo.png`.
 
-### 2. New component: `src/components/site/TeamModule.tsx`
+Since the uploaded logo has a white card background with rounded corners and the site uses a cream background, I'll also generate a transparent-background variant via Nano Banana edit (`mozzco-logo-trim.png`) — just the mark + tagline on transparent — so it sits cleanly on the cream surface without a white rectangle floating in the layout.
 
-A full-bleed editorial spread titled **"The hands behind every batch."** Layout:
+### 2. New shared component: `src/components/site/Logo.tsx`
 
-```text
-┌─────────────────────────────────────────────────────────┐
-│  [ kicker: Plate III — The Curd Room ]                  │
-│                                                         │
-│  ┌──────────────────────────────┐   ── 01 / Maria       │
-│  │                              │   Forty years at      │
-│  │   FULL TEAM PHOTO            │   the curd table.     │
-│  │   (large, ~7 cols)           │                       │
-│  │   subtle warm duotone        │   ── 02 / Lucia       │
-│  │   overlay to harmonize       │   Stretches every     │
-│  │   with cream/olive palette   │   ball by hand.       │
-│  │                              │                       │
-│  └──────────────────────────────┘   ── 03 / Rosa, etc.  │
-│                                                         │
-│  Italic caption beneath photo, 5 cols                   │
-└─────────────────────────────────────────────────────────┘
+A single source of truth so the logo is consistent everywhere:
+
+```tsx
+<Link to="/" aria-label="Mozzco — Handmade Artisanal Cheeses & Creamery">
+  <img src={logo} alt="Mozzco" className={sizeClass} />
+</Link>
 ```
 
-Details:
-- Cream background section, ~py-28.
-- Heading: `display-lg` — *"The hands behind every batch."*
-- Lead paragraph (serif, drop-cap optional): "Five cheesemakers. One curd table. Most mornings, this is exactly what it looks like — Maria, Lucia, Rosa, Elena and Carmen, working a fresh batch before the city is awake."
-- Image: aspect ~5/4, object-cover, with a very subtle warm cream overlay (`mix-blend-multiply` at low opacity) so the bright white tees and stainless steel sit gracefully inside the editorial palette without losing the joy.
-- Right rail: numbered list (01–05) of named makers with one-line credits, separated by hairline rules — turns the photo into a "credits page" the way a magazine names its contributors.
-- Italic serif caption under the photo: *"Plate III — Curd cutting, 6:42 a.m., Dallas factory floor."*
-- Subtle hover: numbered names get a small olive rule extending on hover, echoing existing pattern in `StoryModule`.
+Props: `variant?: "nav" | "footer"` to control height (nav: ~h-9, footer: ~h-14).
 
-### 3. Placement in `src/routes/index.tsx`
+### 3. Update `SiteNav.tsx`
 
-Insert **between `StoryModule` and `CheeseCompass`**:
+Replace the text wordmark `Mozzco.` with `<Logo variant="nav" />`. The logo's green matches the existing `--olive-deep` ink, so it harmonises with the palette. On scroll the nav already swaps to a cream background, so the logo will read on both the transparent hero state and the scrolled state.
 
-```text
-StoryModule (Paula's portrait — the founder)
-TeamModule  (the team — "and these are the hands today")  ← NEW
-CheeseCompass
-```
+### 4. Update `SiteFooter.tsx`
 
-This builds a natural narrative arc: founder → team → product discovery.
+Replace the large `Mozzco.` wordmark in the footer's left column with `<Logo variant="footer" />` at a larger size (~h-14 / ~150px wide). Keep the existing italic tagline beneath it ("Italian-style cheeses, made by hand in Dallas since 1982.") — the logo's own tagline is small and the footer benefits from the bigger statement.
 
-### 4. Small style touches
+### 5. Favicon + OG
 
-- No new fonts or palette tokens needed — uses existing `cream`, `butter`, `olive`, `kicker`, `rule-mark`, `caption`, `display-lg`, `hairline-rule`.
-- Image rendered with `loading="lazy"` and explicit width/height to avoid CLS.
-- Honors `prefers-reduced-motion` (no entrance animation beyond the existing `fade-up` utility).
+- Replace `public/favicon.ico` reference and add `public/favicon.png` from a square crop of the mark (just the "MOZZCO" lettering, no tagline) so it reads at 32×32.
+- Add the logo as default `og:image` in `__root.tsx` so social shares carry the brand mark.
 
 ### Out of scope
-- No changes to nav, hero, or other modules.
-- Not replacing the Paula portrait in `StoryModule` — the two photos serve different roles (founder vs. team).
+
+- No changes to typography, colors, or other modules.
+- Hero, story, team, and product sections keep their existing imagery — the logo is brand identity, not editorial content.
+
+### Files touched
+
+- **created** `src/assets/mozzco-logo.png` (and `mozzco-logo-trim.png` transparent variant)
+- **created** `public/favicon.png`
+- **created** `src/components/site/Logo.tsx`
+- **edited** `src/components/site/SiteNav.tsx`
+- **edited** `src/components/site/SiteFooter.tsx`
+- **edited** `src/routes/__root.tsx` (favicon + default og:image)
 
 Ready to implement on approval.
