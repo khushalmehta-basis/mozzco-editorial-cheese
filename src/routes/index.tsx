@@ -5,6 +5,7 @@ import { CategoryGrid } from "@/components/site/CategoryGrid";
 import { PullQuote } from "@/components/site/PullQuote";
 import { FeaturedProducts } from "@/components/site/FeaturedProducts";
 import { StoryModule } from "@/components/site/StoryModule";
+import { TeamModule } from "@/components/site/TeamModule";
 import { CheeseCompass } from "@/components/site/CheeseCompass";
 import { Classes } from "@/components/site/Classes";
 import { Recipes } from "@/components/site/Recipes";
@@ -35,6 +36,7 @@ function Home() {
       <PullQuote />
       <FeaturedProducts />
       <StoryModule />
+      <TeamModule />
       <CheeseCompass />
       <Classes />
       <Recipes />
