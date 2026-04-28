@@ -8,7 +8,7 @@ const cols = [
 
 export function SiteFooter() {
   return (
-    <footer className="bg-cream pt-24 pb-10">
+    <footer className="bg-cream pt-12 pb-10">
       <div className="max-w-[1280px] mx-auto px-6 lg:px-10">
         <div className="flex flex-col lg:flex-row justify-between gap-14 mb-16">
           <div className="lg:max-w-xs">
