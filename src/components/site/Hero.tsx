@@ -25,7 +25,7 @@ export function Hero() {
             <span className="rule-mark" />
             <span className="kicker">Est. 1982 — Dallas, Texas</span>
           </div>
-          <h1 className="display-xl text-ink">
+          <h1 className="display-lg text-ink">
             Made by hand<br />
             in Dallas<br />
             <em className="italic font-normal text-olive-deep">since 1982.</em>
